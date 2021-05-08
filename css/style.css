@@ -10,7 +10,7 @@ canvas {
     bottom: 0;
     left: 0;
     right: 0;
-    background: url('/img/beach.png');
+    background: url("img/beach.png");
     background-repeat: no-repeat;
     background-size: 1000px 600px;
 }
