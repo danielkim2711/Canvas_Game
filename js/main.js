@@ -1,119 +1,74 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
-const image = document.getElementById('source');
+canvas.width = 1000;
+canvas.height = 600;
 
-function score() {
-    ctx.font = '20px Arial';
-    ctx.fillSytle = 'black';
-    ctx.fillText('Score:', 0, 20);
-    ctx.font = '20px Arial';
-    ctx.fillSytle = 'black';
-    ctx.fillText('Time Left:', 100, 20);
-}
+const keys = [];
 
 const player = {
-    w: 70,
-    h: 100,
-    x: canvas.width / 2,
-    y: canvas.height / 2,
-    speed: 3,
-    dx: 0,
-    dy: 0
+    x: 500,
+    y: 350,
+    width: 40,
+    height: 56,
+    frameX: 0,
+    frameY: 0,
+    speed: 7,
+    moving: false
 };
 
-function drawPlayer() {
-    ctx.drawImage(image, player.x, player.y, player.w, player.h);
+const character = new Image();
+character.src = "img/hulk.png";
+const background = new Image();
+background.src = "img/beach.png";
+
+function drawCharacter(img, sX, sY, sW, sH, dX, dY, dW, dH) {
+    ctx.drawImage(img, sX, sY, sW, sH, dX, dY, dW, dH);
 }
 
-function clear() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+window.addEventListener('keydown', function (e) {
+    keys[e.keyCode] = true;
+    player.moving = true;
+});
+
+window.addEventListener('keyup', function (e) {
+    delete keys[e.keyCode];
+    player.moving = false;
+});
+
+function movePlayer() {
+    // Move Left
+    if (keys[37] && player.x > 0 || keys[65] && player.x > 0) {
+        player.x -= player.speed;
+        player.frameY = 1;
+        // Move Up
+    } else if (keys[38] && player.y > 250 || keys[87] && player.y > 250) {
+        player.y -= player.speed;
+        player.frameY = 3;
+        // Move Right
+    } else if (keys[39] && player.x < canvas.width - player.width || keys[68] && player.x < canvas.width - player.width) {
+        player.x += player.speed;
+        player.frameY = 2;
+        // Move Down
+    } else if (keys[40] && player.y < canvas.height - player.height || keys[83] && player.y < canvas.height - player.height) {
+        player.y += player.speed;
+        player.frameY = 0;
+    }
 }
 
-function newPos() {
-    player.x += player.dx;
-    player.y += player.dy;
-
-    detectWalls();
-}
-
-function detectWalls() {
-    // Left wall
-    if (player.x < 0) {
-        player.x = 0;
-    }
-
-    // Right Wall
-    if (player.x + player.w > canvas.width) {
-        player.x = canvas.width - player.w;
-    }
-
-    // Top wall
-    if (player.y < 0) {
-        player.y = 0;
-    }
-
-    // Bottom Wall
-    if (player.y + player.h > canvas.height) {
-        player.y = canvas.height - player.h;
-    }
+function handlePlayerFrame() {
+    if (player.frameX < 3 && player.moving) {
+        player.frameX++;
+    } else player.frameX = 0;
 }
 
 function update() {
-    clear();
-
-    drawPlayer();
-
-    newPos();
-
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+    drawCharacter(character, player.width * player.frameX, player.height * player.frameY, player.width, player.height, player.x, player.y, player.width, player.height);
+    movePlayer();
+    handlePlayerFrame();
     requestAnimationFrame(update);
 }
 
-function moveUp() {
-    player.dy = -player.speed;
-}
-
-function moveDown() {
-    player.dy = player.speed;
-}
-
-function moveRight() {
-    player.dx = player.speed;
-}
-
-function moveLeft() {
-    player.dx = -player.speed;
-}
-
-function keyDown(e) {
-    if (e.key === 'ArrowRight' || e.key === 'Right') {
-        moveRight();
-    } else if (e.key === 'ArrowLeft' || e.key === 'Left') {
-        moveLeft();
-    } else if (e.key === 'ArrowUp' || e.key === 'Up') {
-        moveUp();
-    } else if (e.key === 'ArrowDown' || e.key === 'Down') {
-        moveDown();
-    }
-}
-
-function keyUp(e) {
-    if (
-        e.key == 'Right' ||
-        e.key == 'ArrowRight' ||
-        e.key == 'Left' ||
-        e.key == 'ArrowLeft' ||
-        e.key == 'Up' ||
-        e.key == 'ArrowUp' ||
-        e.key == 'Down' ||
-        e.key == 'ArrowDown'
-    ) {
-        player.dx = 0;
-        player.dy = 0;
-    }
-}
-
 update();
-
-document.addEventListener('keydown', keyDown);
-document.addEventListener('keyup', keyUp);
