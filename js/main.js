@@ -14,8 +14,9 @@ const player = {
     height: 56,
     frameX: 0,
     frameY: 0,
-    speed: 7,
+    speed: 3,
     moving: false
+
 };
 
 const worm = {
@@ -81,18 +82,25 @@ function movePlayer() {
     if (keys[37] && player.x > 0 || keys[65] && player.x > 0) {
         player.x -= player.speed;
         player.frameY = 1;
+        player.moving = true;
+
         // Move Up
     } else if (keys[38] && player.y > 250 || keys[87] && player.y > 250) {
         player.y -= player.speed;
         player.frameY = 3;
+        player.moving = true;
+
         // Move Right
     } else if (keys[39] && player.x < canvas.width - player.width || keys[68] && player.x < canvas.width - player.width) {
         player.x += player.speed;
         player.frameY = 2;
+        player.moving = true;
+
         // Move Down
     } else if (keys[40] && player.y < canvas.height - player.height || keys[83] && player.y < canvas.height - player.height) {
         player.y += player.speed;
         player.frameY = 0;
+        player.moving = true;
     }
 }
 
