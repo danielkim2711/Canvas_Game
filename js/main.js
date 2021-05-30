@@ -14,9 +14,8 @@ const player = {
     height: 56,
     frameX: 0,
     frameY: 0,
-    speed: 3,
+    speed: 5,
     moving: false
-
 };
 
 const worm = {
@@ -129,7 +128,6 @@ function animate() {
     drawScore();
     movePlayer();
     moveWorm();
-    timeLeft();
     handlePlayerFrame();
     requestAnimationFrame(animate);
 }
