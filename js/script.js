@@ -8,6 +8,13 @@ canvas.height = 600;
 let num = 180;
 let intvl;
 
+let score = 0;
+
+let startSound = new Audio('../sound/start.wav');
+let happySound = new Audio('../sound/happy.wav');
+let unhappySound = new Audio('../sound/unhappy.wav');
+let finishSound = new Audio('../sound/finish.wav');
+
 let isStart = false;
 
 const character = new Image();
@@ -36,7 +43,7 @@ let worms = [
         radius: 10,
         dx: 1,
         dy: 1,
-        lc: 4,
+        lc: 1,
         time: 1,
         delay: 0
     },
@@ -46,7 +53,7 @@ let worms = [
         radius: 10,
         dx: 1,
         dy: 1,
-        lc: 4,
+        lc: 1,
         time: 1,
         delay: 0
     },
@@ -56,7 +63,7 @@ let worms = [
         radius: 10,
         dx: 1,
         dy: 1,
-        lc: 4,
+        lc: 1,
         time: 1,
         delay: 0
     },
@@ -66,7 +73,7 @@ let worms = [
         radius: 10,
         dx: 1,
         dy: 1,
-        lc: 4,
+        lc: 1,
         time: 1,
         delay: 0
     },
@@ -76,7 +83,7 @@ let worms = [
         radius: 10,
         dx: 1,
         dy: 1,
-        lc: 4,
+        lc: 1,
         time: 1,
         delay: 0
     },
@@ -86,7 +93,7 @@ let worms = [
         radius: 10,
         dx: 1,
         dy: 1,
-        lc: 4,
+        lc: 1,
         time: 1,
         delay: 0
     },
@@ -96,7 +103,7 @@ let worms = [
         radius: 10,
         dx: 1,
         dy: 1,
-        lc: 4,
+        lc: 1,
         time: 1,
         delay: 0
     },
@@ -106,7 +113,7 @@ let worms = [
         radius: 10,
         dx: 1,
         dy: 1,
-        lc: 4,
+        lc: 1,
         time: 1,
         delay: 0
     },
@@ -116,7 +123,7 @@ let worms = [
         radius: 10,
         dx: 1,
         dy: 1,
-        lc: 4,
+        lc: 1,
         time: 1,
         delay: 0
     },
@@ -126,7 +133,7 @@ let worms = [
         radius: 10,
         dx: 1,
         dy: 1,
-        lc: 4,
+        lc: 1,
         time: 1,
         delay: 0
     },
@@ -136,7 +143,7 @@ let worms = [
         radius: 10,
         dx: 1,
         dy: 1,
-        lc: 4,
+        lc: 1,
         time: 1,
         delay: 0
     },
@@ -146,7 +153,7 @@ let worms = [
         radius: 10,
         dx: 1,
         dy: 1,
-        lc: 4,
+        lc: 1,
         time: 1,
         delay: 0
     },
@@ -156,7 +163,7 @@ let worms = [
         radius: 10,
         dx: 1,
         dy: 1,
-        lc: 4,
+        lc: 1,
         time: 1,
         delay: 0
     },
@@ -166,7 +173,7 @@ let worms = [
         radius: 10,
         dx: 1,
         dy: 1,
-        lc: 4,
+        lc: 1,
         time: 1,
         delay: 0
     },
@@ -176,7 +183,7 @@ let worms = [
         radius: 10,
         dx: 1,
         dy: 1,
-        lc: 4,
+        lc: 1,
         time: 1,
         delay: 0
     },
@@ -186,7 +193,7 @@ let worms = [
         radius: 10,
         dx: 1,
         dy: 1,
-        lc: 4,
+        lc: 1,
         time: 1,
         delay: 0
     },
@@ -196,7 +203,7 @@ let worms = [
         radius: 10,
         dx: 1,
         dy: 1,
-        lc: 4,
+        lc: 1,
         time: 1,
         delay: 0
     }
@@ -222,6 +229,7 @@ function moveWorm() {
                 worms[i].y += worms[i].dy;
                 worms[i].time = num;
                 worms[i].lc = 2;
+                //console.log("Life Cycle One")
                 break;
             case 2:
                 worms[i].x += worms[i].dx;
@@ -231,7 +239,7 @@ function moveWorm() {
                 if (worms[i].time - num > 5) {
                     worms[i].lc = 3;
                     worms[i].time = num;
-                    console.log("change to 3");
+                    //console.log("Life Cycle Two");
                 }
                 break;
             case 3:
@@ -249,7 +257,7 @@ function moveWorm() {
                 break;
             case 4:
                 worms[i].delay--;
-                console.log("case 4", worms[i].delay);
+                //console.log("Life Cycle 4", worms[i].delay);
 
                 if (worms[i].delay <= 0) {
                     worms[i].lc = 1;
@@ -269,7 +277,7 @@ function drawScore() {
     ctx.fillRect(0, 0, 250, 40);
     ctx.font = '20px Arial';
     ctx.fillStyle = '#000';
-    ctx.fillText("Score: ", 10, 25);
+    ctx.fillText("Score: " + score, 10, 25);
     ctx.fillText("Time Left: ", 120, 25);
     timeLeft();
 }
@@ -282,6 +290,7 @@ function timeLeft() {
     if (num === 0) {
         clearInterval(intvl);
         alert("Game Over");
+        finishSound.play();
         num = "0";
     }
 }
@@ -329,9 +338,15 @@ function movePlayer() {
 
         // Catch
     } else if (keys[32]) {
-        player.frameY = 1;
-        player.moving = true;
-        checkObjectCollisions();
+        if (checkObjectCollisions()) {
+            console.log("success");
+            happySound.play();
+            score += 1;
+        }
+        // } else if (!checkObjectCollisions()) {
+        //     console.log("failed");
+        //     unhappySound.play();
+        // }
     }
 }
 
@@ -352,7 +367,6 @@ function reset(worm) {
     worm.dy = getRandomInRange(0, 4) - 2;
     worm.delay = getRandomInRange(20, 100);
     worm.lc = 4;
-    console.log("reset", worm);
 }
 
 function checkCollisions() {
@@ -386,8 +400,29 @@ function checkObjectCollisions() {
     }
     if (isCol) {
         reset(worms[i]);
+        console.log("collision1");
     }
 }
+
+// for (var i = 0; i < this.squares.length; i++) {
+//     if (object !== this.squares[i]) {
+//         var isCol = this.rectIntersect(
+//             object.x,
+//             object.y,
+//             object.width,
+//             object.height,
+//             this.squares[i].x,
+//             this.squares[i].y,
+//             this.squares[i].width,
+//             this.squares[i].height
+//         );
+//         object.isColliding = isCol;
+//         if (isCol) {
+//             (this.squares[i]).isColliding = isCol;
+//             break;
+//         }
+//     }
+// }
 
 function rectIntersect(x1, y1, w1, h1, x2, y2, w2, h2) {
     if (x2 > w1 + x1 || x1 > w2 + x2 || y2 > h1 + y1 || y1 > h2 + y2) {
@@ -417,30 +452,29 @@ function animate() {
 
 function startBtn() {
     ctx.fillStyle = 'blue';
-    ctx.fillRect(400, 250, 200, 100);
+    ctx.fillRect(430, 250, 150, 100);
     ctx.fill();
     ctx.font = '50px Arial';
-    ctx.fillStyle = '#000';
+    ctx.fillStyle = '#fff';
     ctx.fillText("Start", 450, 320);
     ctx.fill();
 }
 
-function pauseBtn() {
+function pause() {
     ctx.font = '50px Arial';
     ctx.fillStyle = '#000';
-    ctx.fillText("Pause", 450, 320);
+    ctx.fillText("Pause", 150, 320);
     ctx.fill();
-    start();
 }
 
 function start() {
     isStart = true;
     intvl = setInterval(function () { timeLeft(num--); }, 1000);
+    startSound.play();
     animate();
 }
 
 startBtn();
-
 
 // function checkObjectCollisions(object, index) {
 //     // check parameter square against all other squares
