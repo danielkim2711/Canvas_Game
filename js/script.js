@@ -10,7 +10,7 @@ let intvl;
 
 let score = 0;
 
-let startSound = new Audio('../sound/start.wav');
+let startSound = new Audio('../sound/start.ogg');
 let happySound = new Audio('../sound/happy.wav');
 let unhappySound = new Audio('../sound/unhappy.wav');
 let finishSound = new Audio('../sound/finish.wav');
