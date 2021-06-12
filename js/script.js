@@ -283,13 +283,12 @@ function setVolume100() {
 
 function drawScore() {
     ctx.fillStyle = 'white';
-    ctx.fillRect(0, 0, 250, 40);
+    ctx.fillRect(0, 0, 250, 35);
     ctx.font = '20px Arial';
     ctx.fillStyle = '#000';
-    ctx.fillText("Score: " + score, 10, 25);
+    ctx.fillText("Score: ", 10, 25);
+    ctx.fillText(score, 70, 25);
     ctx.fillText("Time Left: ", 120, 25);
-    ctx.font = '20px Arial';
-    ctx.fillStyle = '#000';
     ctx.fillText("Volume: " + (startSound.volume * 100) + "%", 870, 595);
     timeLeft();
 }
@@ -298,7 +297,7 @@ function timeLeft() {
     if (num > 10) {
         ctx.font = "20px Arial";
         ctx.fillStyle = "#000";
-        ctx.fillText(num, 210, 25);
+        ctx.fillText(num, 208, 25);
     }
 
     else if (num <= 10 && num > 0) {
