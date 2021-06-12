@@ -10,17 +10,15 @@
 </head>
 
 <body>
-    <div id="instruction">
-        <h1>How to play:</h1>
-
-        <p>
-            Press W, A, S, D or Arrow keys to move, press SPACE to catch the worms. <br />
-            To successfully catch a worm, you should get close enough to a worm and press SPACE to catch.
-        </p>
-    </div>
-
     <canvas id="canvas"></canvas>
-
+    <button onclick="setVolume25()" type="button">Set volume to 25%</button>
+    <button onclick="setVolume50()" type="button">Set volume to 50%</button>
+    <button onclick="setVolume75()" type="button">Set volume to 75%</button>
+    <button onclick="setVolume100()" type="button">Set volume to 100%</button>
+    <button onclick="setTimeOneMin()" type="button">Set Time to 1 Minute</button>
+    <button onclick="setTimeTwoMin()" type="button">Set Time to 2 Minutes</button>
+    <button onclick="setTimeFourMin()" type="button">Set Time to 4 Minutes</button>
+    <button onclick="setTimeFiveMin()" type="button">Set Time to 5 Minutes</button>
     <script src="js/script.js">
     </script>
 </body>

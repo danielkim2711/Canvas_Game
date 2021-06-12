@@ -17,8 +17,3 @@ canvas {
     height: 600px;
     border: 10px solid rgb(90, 160, 160);
 }
-
-#instruction {
-    position: fixed;
-    top: 5%;
-}

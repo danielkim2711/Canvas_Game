@@ -11,10 +11,12 @@ let score = 0;
 
 let startSound = new Audio('../sound/start.wav');
 let happySound = new Audio('../sound/happy.wav');
-let unhappySound = new Audio('../sound/unhappy.wav');
+let unHappySound = new Audio('../sound/unhappy.wav');
 let finishSound = new Audio('../sound/finish.wav');
 
 let isStart = false;
+
+let pressed = false;
 
 const character = new Image();
 character.src = "img/ironman.png";
@@ -32,7 +34,6 @@ const player = {
     frameY: 0,
     speed: 3,
     moving: false,
-    isColliding: false
 };
 
 const worms = [
@@ -43,178 +44,161 @@ const worms = [
         dx: 1,
         dy: 1,
         lc: 1,
-        time: 1,
+        time: 0,
+        delay: 0
+    },
+    {
+        x: 0,
+        y: 0,
+        radius: 10,
+        dx: 1,
+        dy: 1,
+        lc: 1,
+        time: 0,
+        delay: 0
+    },
+    {
+        x: 0,
+        y: 0,
+        radius: 10,
+        dx: 1,
+        dy: 1,
+        lc: 1,
+        time: 0,
+        delay: 0
+    },
+    {
+        x: 0,
+        y: 0,
+        radius: 10,
+        dx: 1,
+        dy: 1,
+        lc: 1,
+        time: 0,
+        delay: 0
+    },
+    {
+        x: 0,
+        y: 0,
+        radius: 10,
+        dx: 1,
+        dy: 1,
+        lc: 1,
+        time: 0,
+        delay: 0
+    },
+    {
+        x: 0,
+        y: 0,
+        radius: 10,
+        dx: 1,
+        dy: 1,
+        lc: 1,
+        time: 0,
+        delay: 0
+    },
+    {
+        x: 0,
+        y: 0,
+        radius: 10,
+        dx: 1,
+        dy: 1,
+        lc: 1,
+        time: 0,
+        delay: 0
+    },
+    {
+        x: 0,
+        y: 0,
+        radius: 10,
+        dx: 1,
+        dy: 1,
+        lc: 1,
+        time: 0,
+        delay: 0
+    },
+    {
+        x: 0,
+        y: 0,
+        radius: 10,
+        dx: 1,
+        dy: 1,
+        lc: 1,
+        time: 0,
+        delay: 0
+    },
+    {
+        x: 0,
+        y: 0,
+        radius: 10,
+        dx: 1,
+        dy: 1,
+        lc: 1,
+        time: 0,
+        delay: 0
+    },
+    {
+        x: 0,
+        y: 0,
+        radius: 10,
+        dx: 1,
+        dy: 1,
+        lc: 1,
+        time: 0,
+        delay: 0
+    },
+    {
+        x: 0,
+        y: 0,
+        radius: 10,
+        dx: 1,
+        dy: 1,
+        lc: 1,
+        time: 0,
+        delay: 0
+    },
+    {
+        x: 0,
+        y: 0,
+        radius: 10,
+        dx: 1,
+        dy: 1,
+        lc: 1,
+        time: 0,
+        delay: 0
+    },
+    {
+        x: 0,
+        y: 0,
+        radius: 10,
+        dx: 1,
+        dy: 1,
+        lc: 1,
+        time: 0,
+        delay: 0
+    },
+    {
+        x: 0,
+        y: 0,
+        radius: 10,
+        dx: 1,
+        dy: 1,
+        lc: 1,
+        time: 0,
         delay: 0
     }
-    // {
-    //     x: 0,
-    //     y: 0,
-    //     radius: 10,
-    //     dx: 1,
-    //     dy: 1,
-    //     lc: 1,
-    //     time: 1,
-    //     delay: 0
-    // },
-    // {
-    //     x: 0,
-    //     y: 0,
-    //     radius: 10,
-    //     dx: 1,
-    //     dy: 1,
-    //     lc: 1,
-    //     time: 1,
-    //     delay: 0
-    // },
-    // {
-    //     x: 0,
-    //     y: 0,
-    //     radius: 10,
-    //     dx: 1,
-    //     dy: 1,
-    //     lc: 1,
-    //     time: 1,
-    //     delay: 0
-    // },
-    // {
-    //     x: 0,
-    //     y: 0,
-    //     radius: 10,
-    //     dx: 1,
-    //     dy: 1,
-    //     lc: 1,
-    //     time: 1,
-    //     delay: 0
-    // },
-    // {
-    //     x: 0,
-    //     y: 0,
-    //     radius: 10,
-    //     dx: 1,
-    //     dy: 1,
-    //     lc: 1,
-    //     time: 1,
-    //     delay: 0
-    // },
-    // {
-    //     x: 0,
-    //     y: 0,
-    //     radius: 10,
-    //     dx: 1,
-    //     dy: 1,
-    //     lc: 1,
-    //     time: 1,
-    //     delay: 0
-    // },
-    // {
-    //     x: 0,
-    //     y: 0,
-    //     radius: 10,
-    //     dx: 1,
-    //     dy: 1,
-    //     lc: 1,
-    //     time: 1,
-    //     delay: 0
-    // },
-    // {
-    //     x: 0,
-    //     y: 0,
-    //     radius: 10,
-    //     dx: 1,
-    //     dy: 1,
-    //     lc: 1,
-    //     time: 1,
-    //     delay: 0
-    // },
-    // {
-    //     x: 0,
-    //     y: 0,
-    //     radius: 10,
-    //     dx: 1,
-    //     dy: 1,
-    //     lc: 1,
-    //     time: 1,
-    //     delay: 0
-    // },
-    // {
-    //     x: 0,
-    //     y: 0,
-    //     radius: 10,
-    //     dx: 1,
-    //     dy: 1,
-    //     lc: 1,
-    //     time: 1,
-    //     delay: 0
-    // },
-    // {
-    //     x: 0,
-    //     y: 0,
-    //     radius: 10,
-    //     dx: 1,
-    //     dy: 1,
-    //     lc: 1,
-    //     time: 1,
-    //     delay: 0
-    // },
-    // {
-    //     x: 0,
-    //     y: 0,
-    //     radius: 10,
-    //     dx: 1,
-    //     dy: 1,
-    //     lc: 1,
-    //     time: 1,
-    //     delay: 0
-    // },
-    // {
-    //     x: 0,
-    //     y: 0,
-    //     radius: 10,
-    //     dx: 1,
-    //     dy: 1,
-    //     lc: 1,
-    //     time: 1,
-    //     delay: 0
-    // },
-    // {
-    //     x: 0,
-    //     y: 0,
-    //     radius: 10,
-    //     dx: 1,
-    //     dy: 1,
-    //     lc: 1,
-    //     time: 1,
-    //     delay: 0
-    // },
-    // {
-    //     x: 0,
-    //     y: 0,
-    //     radius: 10,
-    //     dx: 1,
-    //     dy: 1,
-    //     lc: 1,
-    //     time: 1,
-    //     delay: 0
-    // },
-    // {
-    //     x: 0,
-    //     y: 0,
-    //     radius: 10,
-    //     dx: 1,
-    //     dy: 1,
-    //     lc: 1,
-    //     time: 1,
-    //     delay: 0
-    // }
 ];
 
 function drawWorm(worm) {
     if (worm.delay <= 0) {
         ctx.beginPath();
+        var grd = ctx.createRadialGradient(worm.x + worm.radius, worm.y + worm.radius, 5, worm.x + worm.radius, worm.y + worm.radius, 10);
+        grd.addColorStop(0, "white");
+        grd.addColorStop(1, "rgb(250, 200, 120)");
         ctx.arc(worm.x + worm.radius, worm.y + worm.radius, worm.radius, Math.PI, 0);
-        ctx.fillStyle = 'rgb(250, 200, 120)';
+        ctx.fillStyle = grd;
         ctx.fill();
-        ctx.lineWidth = 1.5;
+        ctx.lineWidth = 1;
         ctx.strokeStyle = "black";
         ctx.stroke();
     }
@@ -224,6 +208,7 @@ function moveWorm() {
     for (var i = 0; i < worms.length; i++) {
         switch (worms[i].lc) {
             case 1:
+                worms[i].radius = 10;
                 worms[i].x += worms[i].dx;
                 worms[i].y += worms[i].dy;
                 worms[i].time = num;
@@ -268,6 +253,34 @@ function drawCharacter(img, sX, sY, sW, sH, dX, dY, dW, dH) {
     ctx.drawImage(img, sX, sY, sW, sH, dX, dY, dW, dH);
 }
 
+function setVolume25() {
+    startSound.volume = 0.25;
+    happySound.volume = 0.25;
+    unHappySound.volume = 0.25;
+    finishSound.volume = 0.25;
+}
+
+function setVolume50() {
+    startSound.volume = 0.5;
+    happySound.volume = 0.5;
+    unHappySound.volume = 0.5;
+    finishSound.volume = 0.5;
+}
+
+function setVolume75() {
+    startSound.volume = 0.75;
+    happySound.volume = 0.75;
+    unHappySound.volume = 0.75;
+    finishSound.volume = 0.75;
+}
+
+function setVolume100() {
+    startSound.volume = 1;
+    happySound.volume = 1;
+    unHappySound.volume = 1;
+    finishSound.volume = 1;
+}
+
 function drawScore() {
     ctx.fillStyle = 'white';
     ctx.fillRect(0, 0, 250, 40);
@@ -275,6 +288,9 @@ function drawScore() {
     ctx.fillStyle = '#000';
     ctx.fillText("Score: " + score, 10, 25);
     ctx.fillText("Time Left: ", 120, 25);
+    ctx.font = '20px Arial';
+    ctx.fillStyle = '#000';
+    ctx.fillText("Volume: " + (startSound.volume * 100) + "%", 870, 590);
     timeLeft();
 }
 
@@ -292,7 +308,6 @@ function gameOver() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     isStart = false;
     clearInterval(intvl);
-    alert("Game Over");
     finishSound.play();
     num = '0';
     replayBtn();
@@ -301,26 +316,68 @@ function gameOver() {
 function replayBtn() {
     ctx.fillStyle = 'rgb(250, 200, 120)';
     ctx.fillRect(10, 10, 980, 580);
-    ctx.fill();
     ctx.fillStyle = '#fff';
-    ctx.fillRect(430, 270, 200, 70);
-    ctx.fill();
+    ctx.fillRect(410, 470, 200, 70);
+    ctx.strokeStyle = "#000";
+    ctx.strokeRect(410, 470, 200, 70);
     ctx.font = '50px Arial';
     ctx.fillStyle = '#000';
-    ctx.fillText("Your Score is " + score, 330, 250);
-    ctx.fill();
+    ctx.fillText("Congratulations!", 300, 270);
+    ctx.font = '30px Arial';
+    ctx.fillStyle = '#000';
+    ctx.fillText("Your Score is " + score, 330, 330);
     ctx.font = '50px Arial';
     ctx.fillStyle = '#000';
-    ctx.fillText("Restart", 450, 320);
-    ctx.fill();
+    ctx.fillText("Restart", 430, 520);
+}
+
+function setTimeOneMin() {
+    if (!isStart) {
+        num = 60;
+        score = 0;
+        start();
+    }
+}
+
+function setTimeTwoMin() {
+    if (!isStart) {
+        num = 120;
+        score = 0;
+        start();
+    }
+}
+
+function setTimeFourMin() {
+    if (!isStart) {
+        num = 240;
+        score = 0;
+        start();
+    }
+}
+
+function setTimeFiveMin() {
+    if (!isStart) {
+        num = 300;
+        score = 0;
+        start();
+    }
 }
 
 window.addEventListener('keydown', function (e) {
-    keys[e.keyCode] = true;
-    player.moving = true;
+    if (e.keyCode == 32 || e.keyCode == 37 || e.keyCode == 38 || e.keyCode == 39 || e.keyCode == 40
+        || e.keyCode == 65 || e.keyCode == 87 || e.keyCode == 68 || e.keyCode == 83) {
+        keys[e.keyCode] = true;
+        player.moving = true;
+    }
+
+    if (!pressed) {
+        pressed = true;
+        catchWorms();
+    }
 });
 
 window.addEventListener('keyup', function (e) {
+    pressed = false;
     delete keys[e.keyCode];
     player.moving = false;
 });
@@ -357,9 +414,11 @@ function movePlayer() {
         player.y += player.speed;
         player.frameY = 0;
         player.moving = true;
+    }
+}
 
-        // Catch
-    } else if (keys[32]) {
+function catchWorms() {
+    if (keys[32]) {
         checkObjectCollisions()
         player.frameY = 3;
         player.moving = true;
@@ -412,16 +471,17 @@ function checkObjectCollisions() {
             worms[i].y,
             worms[i].radius
         );
-        if (isCol === true) {
+        //console.log(isCol);
+        if (isCol) {
             reset(worms[i]);
+            unHappySound.pause();
+            unHappySound.currentTime = 0;
             happySound.load();
             happySound.play();
             score++;
-            console.log("Collided", player.x, player.y, player.width, player.height);
-        } else if (!isCol) {
-            unhappySound.load();
-            unhappySound.play();
-            console.log("Not Collided");
+            break;
+        } else {
+            unHappySound.play();
         }
     }
 }
@@ -432,8 +492,9 @@ function intersact(x1, y1, w1, h1, x2, y2, r) {
 
     if (distX > (w1 / 2 + r) || distY > (h1 / 2 + r)) {
         return false;
-    } else if (distX <= (w1 / 2 || distY <= (h1 / 2)))
+    } else if (distX <= (w1 / 2 || distY <= (h1 / 2))) {
         return true;
+    }
 
     var dx = distX - w1 / 2;
     var dy = distY - h1 / 2;
@@ -451,11 +512,11 @@ function gameLoop() {
         ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
         drawCharacter(character, player.width * player.frameX, player.height * player.frameY, player.width, player.height, player.x, player.y, player.width, player.height);
         moveWorm();
+        movePlayer();
         for (var i = 0; i < worms.length; i++) {
             drawWorm(worms[i]);
         }
         drawScore();
-        movePlayer();
         handlePlayerFrame();
         requestAnimationFrame(gameLoop);
     }
@@ -467,14 +528,25 @@ function gameLoop() {
 function startBtn() {
     ctx.fillStyle = 'rgb(250, 200, 120)';
     ctx.fillRect(10, 10, 980, 580);
-    ctx.fill();
     ctx.fillStyle = '#fff';
-    ctx.fillRect(430, 270, 150, 70);
-    ctx.fill();
+    ctx.fillRect(430, 470, 150, 70);
+    ctx.strokeStyle = "#000";
+    ctx.strokeRect(430, 470, 150, 70);
+    ctx.font = '40px Arial';
+    ctx.fillStyle = '#000';
+    ctx.fillText("How to play:", 100, 200);
+    ctx.font = '18px Arial';
+    ctx.fillStyle = '#000';
+    ctx.fillText("Press W, A, S, D or Arrow keys to move, press SPACE to catch the worms.", 100, 250);
+    ctx.fillText("To successfully catch a worm, you should get close enough to a worm and press SPACE to catch.", 100, 270);
+    ctx.fillText("By default, the game time is set to three minutes, but you can change it by pressing one of the time buttons.", 100, 310);
+    ctx.fillText("The game automatically starts when you press it so you don't need to worry!", 100, 330);
     ctx.font = '50px Arial';
     ctx.fillStyle = '#000';
-    ctx.fillText("Start", 450, 320);
-    ctx.fill();
+    ctx.fillText("Good Luck!", 370, 410);
+    ctx.font = '50px Arial';
+    ctx.fillStyle = '#000';
+    ctx.fillText("Start", 450, 520);
 }
 
 function start() {
