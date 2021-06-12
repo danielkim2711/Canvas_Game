@@ -290,16 +290,24 @@ function drawScore() {
     ctx.fillText("Time Left: ", 120, 25);
     ctx.font = '20px Arial';
     ctx.fillStyle = '#000';
-    ctx.fillText("Volume: " + (startSound.volume * 100) + "%", 870, 590);
+    ctx.fillText("Volume: " + (startSound.volume * 100) + "%", 870, 595);
     timeLeft();
 }
 
 function timeLeft() {
-    ctx.font = "20px Arial";
-    ctx.fillStyle = "#000";
-    ctx.fillText(num, 210, 25);
+    if (num > 10) {
+        ctx.font = "20px Arial";
+        ctx.fillStyle = "#000";
+        ctx.fillText(num, 210, 25);
+    }
 
-    if (num === 0) {
+    else if (num <= 10 && num > 0) {
+        ctx.font = "20px Arial";
+        ctx.fillStyle = "red";
+        ctx.fillText(num, 210, 25);
+    }
+
+    else if (num == 0) {
         gameOver();
     }
 }
@@ -309,8 +317,10 @@ function gameOver() {
     isStart = false;
     clearInterval(intvl);
     finishSound.play();
-    num = '0';
     replayBtn();
+    for (var i = 0; i < worms.length; i++) {
+        reset(worms[i]);
+    }
 }
 
 function replayBtn() {
@@ -325,7 +335,7 @@ function replayBtn() {
     ctx.fillText("Congratulations!", 300, 270);
     ctx.font = '30px Arial';
     ctx.fillStyle = '#000';
-    ctx.fillText("Your Score is " + score, 330, 330);
+    ctx.fillText("Your Score is: " + score, 330, 330);
     ctx.font = '50px Arial';
     ctx.fillStyle = '#000';
     ctx.fillText("Restart", 430, 520);
@@ -507,7 +517,6 @@ for (var i = 0; i < worms.length; i++) {
 
 function gameLoop() {
     if (isStart) {
-        checkCollisions();
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
         drawCharacter(character, player.width * player.frameX, player.height * player.frameY, player.width, player.height, player.x, player.y, player.width, player.height);
@@ -518,6 +527,7 @@ function gameLoop() {
         }
         drawScore();
         handlePlayerFrame();
+        checkCollisions();
         requestAnimationFrame(gameLoop);
     }
     else {
@@ -526,7 +536,7 @@ function gameLoop() {
 }
 
 function startBtn() {
-    ctx.fillStyle = 'rgb(250, 200, 120)';
+    ctx.fillStyle = 'rgb(250, 200, 120';
     ctx.fillRect(10, 10, 980, 580);
     ctx.fillStyle = '#fff';
     ctx.fillRect(430, 470, 150, 70);
@@ -534,16 +544,32 @@ function startBtn() {
     ctx.strokeRect(430, 470, 150, 70);
     ctx.font = '40px Arial';
     ctx.fillStyle = '#000';
-    ctx.fillText("How to play:", 100, 200);
+    ctx.fillText("How to play:", 100, 140);
     ctx.font = '18px Arial';
     ctx.fillStyle = '#000';
-    ctx.fillText("Press W, A, S, D or Arrow keys to move, press SPACE to catch the worms.", 100, 250);
-    ctx.fillText("To successfully catch a worm, you should get close enough to a worm and press SPACE to catch.", 100, 270);
-    ctx.fillText("By default, the game time is set to three minutes, but you can change it by pressing one of the time buttons.", 100, 310);
-    ctx.fillText("The game automatically starts when you press it so you don't need to worry!", 100, 330);
+    ctx.fillText("Ironman is trying to catch the beach worms!", 100, 180);
+    ctx.fillText("Help him out by moving and catching them for him.", 100, 200);
+    ctx.font = '25px Arial';
+    ctx.fillStyle = '#000';
+    ctx.fillText("W", 120, 240);
+    ctx.fillText("A S D", 100, 270);
+    ctx.fillText("SPACE", 200, 270);
+    ctx.fillText("↑", 352, 240);
+    ctx.fillText("← ↓ → ", 320, 270);
+    ctx.font = '18px Arial';
+    ctx.fillStyle = 'red';
+    ctx.fillText("Move", 110, 300);
+    ctx.fillText("Catch", 215, 300);
+    ctx.fillText("Move", 335, 300);
+    ctx.font = '18px Arial';
+    ctx.fillStyle = '#000';
+    ctx.fillText("Press a button to change the volume and the time.", 100, 340);
+    ctx.font = '30px Arial';
+    ctx.fillStyle = '#000';
+    ctx.fillText("Catch as many as you can!", 100, 385);
     ctx.font = '50px Arial';
     ctx.fillStyle = '#000';
-    ctx.fillText("Good Luck!", 370, 410);
+    ctx.fillText("Good Luck!", 370, 445);
     ctx.font = '50px Arial';
     ctx.fillStyle = '#000';
     ctx.fillText("Start", 450, 520);
