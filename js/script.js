@@ -283,7 +283,7 @@ function drawScore() {
     ctx.fillStyle = 'white';
     ctx.fillRect(0, 0, 250, 35);
     ctx.font = '20px Arial';
-    ctx.fillStyle = '#000';
+    ctx.fillStyle = 'black';
     ctx.fillText("Score: ", 10, 25);
     ctx.fillText(score, 70, 25);
     ctx.fillText("Time Left: ", 120, 25);
@@ -294,7 +294,7 @@ function drawScore() {
 function timeLeft() {
     if (num > 10) {
         ctx.font = "20px Arial";
-        ctx.fillStyle = "#000";
+        ctx.fillStyle = "black";
         ctx.fillText(num, 208, 25);
     }
 
@@ -323,25 +323,20 @@ function gameOver() {
 function replayBtn() {
     ctx.fillStyle = 'rgb(250, 200, 120)';
     ctx.fillRect(10, 10, 980, 580);
-    ctx.strokeStyle = "#000";
+    ctx.strokeStyle = "black";
     ctx.strokeRect(30, 30, 940, 540);
-    ctx.fillStyle = '#fff';
+    ctx.fillStyle = 'white';
     ctx.fillRect(410, 480, 200, 70);
-    ctx.strokeStyle = "#000";
+    ctx.strokeStyle = "black";
     ctx.strokeRect(410, 480, 200, 70);
     ctx.font = '60px Arial';
-    ctx.strokeStyle = 'black';
-    ctx.fillStyle = 'white';
+    ctx.fillStyle = 'black';
     ctx.fillText("Congratulations!", 300, 270);
-    ctx.strokeText("Congratulations!", 300, 270);
     ctx.font = '50px Arial';
-    ctx.fillStyle = '#000';
+    ctx.fillStyle = 'black';
     ctx.fillText("Restart", 430, 530);
-    // ctx.font = '30px Arial';
-    // ctx.fillStyle = 'red';
-    // ctx.fillText(score, 630, 330);
     ctx.font = '30px Arial';
-    ctx.fillStyle = '#000';
+    ctx.fillStyle = 'black';
     ctx.fillText("You have successfully caught " + score + " worms!", 250, 320);
 }
 
@@ -542,23 +537,24 @@ function gameLoop() {
 function startBtn() {
     ctx.fillStyle = 'rgb(250, 200, 120';
     ctx.fillRect(10, 10, 980, 580);
-    ctx.strokeStyle = "#000";
+    ctx.strokeStyle = "black";
     ctx.strokeRect(30, 30, 940, 540);
-    ctx.fillStyle = '#fff';
-    ctx.fillRect(430, 480, 150, 70);
-    ctx.strokeStyle = "#000";
-    ctx.strokeRect(430, 480, 150, 70);
-    ctx.font = '40px Arial';
-    ctx.storkeStyle = 'black';
     ctx.fillStyle = 'white';
+    ctx.fillRect(430, 480, 150, 70);
+    ctx.strokeStyle = "black";
+    ctx.strokeRect(430, 480, 150, 70);
+    ctx.font = '50px Arial';
+    ctx.fillStyle = 'black';
+    ctx.fillText("Welcome!", 400, 100);
+    ctx.font = '40px Arial';
+    ctx.fillStyle = 'black';
     ctx.fillText("How to play:", 100, 140);
-    ctx.strokeText("How to play:", 100, 140);
     ctx.font = '18px Arial';
-    ctx.fillStyle = '#000';
+    ctx.fillStyle = 'black';
     ctx.fillText("Ironman is trying to catch the beach worms!", 100, 180);
     ctx.fillText("Help him out by moving and catching them for him.", 100, 200);
     ctx.font = '25px Arial';
-    ctx.fillStyle = '#000';
+    ctx.fillStyle = 'black';
     ctx.fillText("W", 120, 240);
     ctx.fillText("A S D", 100, 270);
     ctx.fillText("SPACE", 200, 270);
@@ -570,18 +566,16 @@ function startBtn() {
     ctx.fillText("Catch", 215, 300);
     ctx.fillText("Move", 335, 300);
     ctx.font = '18px Arial';
-    ctx.fillStyle = '#000';
+    ctx.fillStyle = 'black';
     ctx.fillText("Press a button to change the volume and the time.", 100, 340);
     ctx.font = '30px Arial';
-    ctx.fillStyle = '#000';
+    ctx.fillStyle = 'black';
     ctx.fillText("Catch as many as you can!", 100, 385);
     ctx.font = '50px Arial';
-    ctx.strokeStyle = 'black';
-    ctx.fillStyle = 'white';
+    ctx.fillStyle = 'black';
     ctx.fillText("Good Luck!", 370, 455);
-    ctx.strokeText("Good Luck!", 370, 455);
     ctx.font = '50px Arial';
-    ctx.fillStyle = '#000';
+    ctx.fillStyle = 'black';
     ctx.fillText("Start", 450, 530);
 }
 
