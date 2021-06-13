@@ -4,10 +4,9 @@ const ctx = canvas.getContext('2d');
 canvas.width = 1000;
 canvas.height = 600;
 
-let num = 180;
+let num;
 let intvl;
-
-let score = 0;
+let score;
 
 let startSound = new Audio('sound/start.wav');
 let happySound = new Audio('sound/happy.wav');
@@ -15,7 +14,6 @@ let unHappySound = new Audio('sound/unhappy.wav');
 let finishSound = new Audio('sound/finish.wav');
 
 let isStart = false;
-
 let pressed = false;
 
 const character = new Image();
@@ -325,19 +323,26 @@ function gameOver() {
 function replayBtn() {
     ctx.fillStyle = 'rgb(250, 200, 120)';
     ctx.fillRect(10, 10, 980, 580);
-    ctx.fillStyle = '#fff';
-    ctx.fillRect(410, 470, 200, 70);
     ctx.strokeStyle = "#000";
-    ctx.strokeRect(410, 470, 200, 70);
+    ctx.strokeRect(30, 30, 940, 540);
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(410, 480, 200, 70);
+    ctx.strokeStyle = "#000";
+    ctx.strokeRect(410, 480, 200, 70);
+    ctx.font = '60px Arial';
+    ctx.strokeStyle = 'black';
+    ctx.fillStyle = 'white';
+    ctx.fillText("Congratulations!", 300, 270);
+    ctx.strokeText("Congratulations!", 300, 270);
     ctx.font = '50px Arial';
     ctx.fillStyle = '#000';
-    ctx.fillText("Congratulations!", 300, 270);
+    ctx.fillText("Restart", 430, 530);
+    // ctx.font = '30px Arial';
+    // ctx.fillStyle = 'red';
+    // ctx.fillText(score, 630, 330);
     ctx.font = '30px Arial';
     ctx.fillStyle = '#000';
-    ctx.fillText("Your Score is: " + score, 330, 330);
-    ctx.font = '50px Arial';
-    ctx.fillStyle = '#000';
-    ctx.fillText("Restart", 430, 520);
+    ctx.fillText("You have successfully caught " + score + " worms!", 250, 320);
 }
 
 function setTimeOneMin() {
@@ -524,9 +529,9 @@ function gameLoop() {
         for (var i = 0; i < worms.length; i++) {
             drawWorm(worms[i]);
         }
-        drawScore();
-        handlePlayerFrame();
         checkCollisions();
+        handlePlayerFrame();
+        drawScore();
         requestAnimationFrame(gameLoop);
     }
     else {
@@ -537,13 +542,17 @@ function gameLoop() {
 function startBtn() {
     ctx.fillStyle = 'rgb(250, 200, 120';
     ctx.fillRect(10, 10, 980, 580);
-    ctx.fillStyle = '#fff';
-    ctx.fillRect(430, 470, 150, 70);
     ctx.strokeStyle = "#000";
-    ctx.strokeRect(430, 470, 150, 70);
+    ctx.strokeRect(30, 30, 940, 540);
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(430, 480, 150, 70);
+    ctx.strokeStyle = "#000";
+    ctx.strokeRect(430, 480, 150, 70);
     ctx.font = '40px Arial';
-    ctx.fillStyle = '#000';
+    ctx.storkeStyle = 'black';
+    ctx.fillStyle = 'white';
     ctx.fillText("How to play:", 100, 140);
+    ctx.strokeText("How to play:", 100, 140);
     ctx.font = '18px Arial';
     ctx.fillStyle = '#000';
     ctx.fillText("Ironman is trying to catch the beach worms!", 100, 180);
@@ -567,11 +576,13 @@ function startBtn() {
     ctx.fillStyle = '#000';
     ctx.fillText("Catch as many as you can!", 100, 385);
     ctx.font = '50px Arial';
-    ctx.fillStyle = '#000';
-    ctx.fillText("Good Luck!", 370, 445);
+    ctx.strokeStyle = 'black';
+    ctx.fillStyle = 'white';
+    ctx.fillText("Good Luck!", 370, 455);
+    ctx.strokeText("Good Luck!", 370, 455);
     ctx.font = '50px Arial';
     ctx.fillStyle = '#000';
-    ctx.fillText("Start", 450, 520);
+    ctx.fillText("Start", 450, 530);
 }
 
 function start() {
