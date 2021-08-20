@@ -190,7 +190,7 @@ const worms = [
 function drawWorm(worm) {
     if (worm.delay <= 0) {
         ctx.beginPath();
-        var grd = ctx.createRadialGradient(worm.x + worm.radius, worm.y + worm.radius, 5, worm.x + worm.radius, worm.y + worm.radius, 10);
+        let grd = ctx.createRadialGradient(worm.x + worm.radius, worm.y + worm.radius, 5, worm.x + worm.radius, worm.y + worm.radius, 10);
         grd.addColorStop(0, "white");
         grd.addColorStop(1, "rgb(250, 200, 120)");
         ctx.arc(worm.x + worm.radius, worm.y + worm.radius, worm.radius, Math.PI, 0);
@@ -203,7 +203,7 @@ function drawWorm(worm) {
 }
 
 function moveWorm() {
-    for (var i = 0; i < worms.length; i++) {
+    for (let i = 0; i < worms.length; i++) {
         switch (worms[i].lc) {
             case 1:
                 worms[i].radius = 10;
@@ -315,7 +315,7 @@ function gameOver() {
     clearInterval(intvl);
     finishSound.play();
     replayBtn();
-    for (var i = 0; i < worms.length; i++) {
+    for (let i = 0; i < worms.length; i++) {
         reset(worms[i]);
     }
 }
@@ -406,21 +406,24 @@ function movePlayer() {
         player.x -= player.speed;
         player.frameY = 1;
         player.moving = true;
-
-        // Move Up
-    } else if (keys[38] && player.y > 250 || keys[87] && player.y > 250) {
+    }
+    
+    // Move Up
+    else if (keys[38] && player.y > 250 || keys[87] && player.y > 250) {
         player.y -= player.speed;
         player.frameY = 3;
         player.moving = true;
+    }
 
-        // Move Right
-    } else if (keys[39] && player.x < canvas.width - player.width || keys[68] && player.x < canvas.width - player.width) {
+    // Move Right
+    else if (keys[39] && player.x < canvas.width - player.width || keys[68] && player.x < canvas.width - player.width) {
         player.x += player.speed;
         player.frameY = 2;
         player.moving = true;
+    }
 
-        // Move Down
-    } else if (keys[40] && player.y < canvas.height - player.height || keys[83] && player.y < canvas.height - player.height) {
+    // Move Down
+    else if (keys[40] && player.y < canvas.height - player.height || keys[83] && player.y < canvas.height - player.height) {
         player.y += player.speed;
         player.frameY = 0;
         player.moving = true;
@@ -438,11 +441,12 @@ function catchWorms() {
 function handlePlayerFrame() {
     if (player.frameX < 3 && player.moving) {
         player.frameX++;
-    } else player.frameX = 0;
+    }
+    else player.frameX = 0;
 }
 
 function getRandomInRange(min, max) {
-    return Math.random() * (max - Math.abs(min)) + min;
+    return (Math.random() * (max - Math.abs(min)) + min);
 }
 
 function reset(worm) {
@@ -455,7 +459,7 @@ function reset(worm) {
 }
 
 function checkCollisions() {
-    for (var i = 0; i < worms.length; i++) {
+    for (let i = 0; i < worms.length; i++) {
         checkWallCollisions(i);
     }
 }
@@ -471,8 +475,8 @@ function checkWallCollisions(i) {
 }
 
 function checkObjectCollisions() {
-    for (var i = 0; i < worms.length; i++) {
-        var isCol = intersact(
+    for (let i = 0; i < worms.length; i++) {
+        let isCol = intersact(
             player.x,
             player.y,
             player.width,
@@ -497,8 +501,8 @@ function checkObjectCollisions() {
 }
 
 function intersact(x1, y1, w1, h1, x2, y2, r) {
-    var distX = Math.abs(x2 - x1 - w1 / 2);
-    var distY = Math.abs(y2 - y1 - h1 / 2);
+    let distX = Math.abs(x2 - x1 - w1 / 2);
+    let distY = Math.abs(y2 - y1 - h1 / 2);
 
     if (distX > (w1 / 2 + r) || distY > (h1 / 2 + r)) {
         return false;
@@ -506,12 +510,12 @@ function intersact(x1, y1, w1, h1, x2, y2, r) {
         return true;
     }
 
-    var dx = distX - w1 / 2;
-    var dy = distY - h1 / 2;
+    let dx = distX - w1 / 2;
+    let dy = distY - h1 / 2;
     return (dx * dx + dy * dy <= (r * r));
 }
 
-for (var i = 0; i < worms.length; i++) {
+for (let i = 0; i < worms.length; i++) {
     reset(worms[i]);
 }
 
@@ -522,17 +526,15 @@ function gameLoop() {
         drawCharacter(character, player.width * player.frameX, player.height * player.frameY, player.width, player.height, player.x, player.y, player.width, player.height);
         moveWorm();
         movePlayer();
-        for (var i = 0; i < worms.length; i++) {
+        for (let i = 0; i < worms.length; i++)
             drawWorm(worms[i]);
-        }
         checkCollisions();
         handlePlayerFrame();
         drawScore();
         requestAnimationFrame(gameLoop);
     }
-    else {
+    else 
         return;
-    }
 }
 
 function startBtn() {
