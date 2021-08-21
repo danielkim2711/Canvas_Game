@@ -34,158 +34,29 @@ const player = {
     moving: false,
 };
 
-const worms = [
-    {
-        x: 0,
-        y: 0,
-        radius: 10,
-        dx: 1,
-        dy: 1,
-        lc: 1,
-        time: 0,
-        delay: 0
-    },
-    {
-        x: 0,
-        y: 0,
-        radius: 10,
-        dx: 1,
-        dy: 1,
-        lc: 1,
-        time: 0,
-        delay: 0
-    },
-    {
-        x: 0,
-        y: 0,
-        radius: 10,
-        dx: 1,
-        dy: 1,
-        lc: 1,
-        time: 0,
-        delay: 0
-    },
-    {
-        x: 0,
-        y: 0,
-        radius: 10,
-        dx: 1,
-        dy: 1,
-        lc: 1,
-        time: 0,
-        delay: 0
-    },
-    {
-        x: 0,
-        y: 0,
-        radius: 10,
-        dx: 1,
-        dy: 1,
-        lc: 1,
-        time: 0,
-        delay: 0
-    },
-    {
-        x: 0,
-        y: 0,
-        radius: 10,
-        dx: 1,
-        dy: 1,
-        lc: 1,
-        time: 0,
-        delay: 0
-    },
-    {
-        x: 0,
-        y: 0,
-        radius: 10,
-        dx: 1,
-        dy: 1,
-        lc: 1,
-        time: 0,
-        delay: 0
-    },
-    {
-        x: 0,
-        y: 0,
-        radius: 10,
-        dx: 1,
-        dy: 1,
-        lc: 1,
-        time: 0,
-        delay: 0
-    },
-    {
-        x: 0,
-        y: 0,
-        radius: 10,
-        dx: 1,
-        dy: 1,
-        lc: 1,
-        time: 0,
-        delay: 0
-    },
-    {
-        x: 0,
-        y: 0,
-        radius: 10,
-        dx: 1,
-        dy: 1,
-        lc: 1,
-        time: 0,
-        delay: 0
-    },
-    {
-        x: 0,
-        y: 0,
-        radius: 10,
-        dx: 1,
-        dy: 1,
-        lc: 1,
-        time: 0,
-        delay: 0
-    },
-    {
-        x: 0,
-        y: 0,
-        radius: 10,
-        dx: 1,
-        dy: 1,
-        lc: 1,
-        time: 0,
-        delay: 0
-    },
-    {
-        x: 0,
-        y: 0,
-        radius: 10,
-        dx: 1,
-        dy: 1,
-        lc: 1,
-        time: 0,
-        delay: 0
-    },
-    {
-        x: 0,
-        y: 0,
-        radius: 10,
-        dx: 1,
-        dy: 1,
-        lc: 1,
-        time: 0,
-        delay: 0
-    },
-    {
-        x: 0,
-        y: 0,
-        radius: 10,
-        dx: 1,
-        dy: 1,
-        lc: 1,
-        time: 0,
-        delay: 0
+function createWorms(x, y, radius, dx, dy, lc, time, delay) {
+    return {
+        x,
+        y,
+        radius,
+        dx,
+        dy,
+        lc,
+        time,
+        delay
     }
-];
+}
+
+const worms = [createWorms(0, 0, 10, 1, 1, 1, 0, 0),
+    createWorms(0, 0, 10, 1, 1, 1, 0, 0),
+    createWorms(0, 0, 10, 1, 1, 1, 0, 0),
+    createWorms(0, 0, 10, 1, 1, 1, 0, 0),
+    createWorms(0, 0, 10, 1, 1, 1, 0, 0),
+    createWorms(0, 0, 10, 1, 1, 1, 0, 0),
+    createWorms(0, 0, 10, 1, 1, 1, 0, 0),
+    createWorms(0, 0, 10, 1, 1, 1, 0, 0),
+    createWorms(0, 0, 10, 1, 1, 1, 0, 0),
+    createWorms(0, 0, 10, 1, 1, 1, 0, 0)];
 
 function drawWorm(worm) {
     if (worm.delay <= 0) {
