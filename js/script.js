@@ -464,7 +464,7 @@ function startBtn() {
   ctx.font = '18px Arial';
   ctx.fillStyle = 'black';
   ctx.fillText('Ironman is trying to catch the beach worms!', 100, 180);
-  ctx.fillText('Help him out by moving and catching them for him.', 100, 200);
+  ctx.fillText('Help him out by moving and catching them', 100, 200);
   ctx.font = '25px Arial';
   ctx.fillStyle = 'black';
   ctx.fillText('W', 120, 240);
