@@ -1,4 +1,4 @@
-# Canvas Game
+# Canvas Game built with plain HTML, CSS and JavaScript
 
 <img width="80%" src="./assets/images/preview.png" alt="canvas game" />
 
