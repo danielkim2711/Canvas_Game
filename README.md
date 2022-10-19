@@ -6,6 +6,6 @@
 
 This is a canvas game built with plain HTML, CSS and JavaScript for primary schoolers.
 
-Ironman is trying to catch the beach worms, help him out by moving and catching them.
+Ironman is trying to catch the beach worms, help him out with moving and catching them!
 
 https://danielkim2711.github.io/canvas-game
